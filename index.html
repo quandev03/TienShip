@@ -68,6 +68,10 @@
       <label for="">Khoảng cách(Km)</label>
     <input type="number" name="" id="kcach">
     </div>
+    <div class="input">
+      <label for="">Thời Gian(Giờ)</label>
+      <input type="number" name="" id="time">
+    </div>
     <button type="button" id="btn">Tính tiền</button>
   </div>
   <div class="form_output">
@@ -76,10 +80,13 @@
 
   </div>
   <script>
-    kc = document.getElementById('kcach').value;
     document.getElementById('btn').addEventListener("click", function(){
-      time = new Date(Date.now())
-      hour = time.getHours()
+      tg = document.getElementById('time').value
+      kc = document.getElementById('kcach').value;
+      console.log(tg);
+      
+      if(tg <0 || tg >24) tg = null
+      hour = tg? tg:new Date(Date.now()).getHours
       if (hour < 8 || hour >= 23) {
         include = -1
       }else if (hour >= 8 && hour <= 10) {
@@ -87,7 +94,7 @@
       }else if( hour >= 17 && hour <= 20) {
         include = 2
       }else {
-        include = 0
+        include = 1
       }
       
       if (kc < 0.6 ) {
